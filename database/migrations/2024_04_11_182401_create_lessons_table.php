@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->foreignId('course_id')->nullable()->constrained();
-            $table->foreignId('user_id')->nullable()->constrained();
             $table->tinyInteger('is_free')->default(0);
             $table->text('content')->nullable();
             $table->string('video',255)->nullable();
