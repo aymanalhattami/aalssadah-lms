@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->tinyInteger('status')->default(1);
             $table->string('thumbnail',255)->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }
