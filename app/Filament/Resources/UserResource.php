@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,6 +13,9 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserResource extends Resource
 {
@@ -36,7 +40,15 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('email')
                 ->email()
                 ->unique()
-                ->required()
+                ->required(),
+
+
+                Forms\Components\TextInput::make('password')
+                    ->password()
+                    ->rules('min:8|max:10')
+                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->required(fn (string $context): bool => $context === 'create')
 
             ]);
     }
@@ -53,6 +65,17 @@ class UserResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('Change_password')->icon('heroicon-s-key')->form([
+                    Forms\Components\TextInput::make('new_password')->required()->label('New Password')->
+                    password()->rule(Password::default()),
+                    Forms\Components\TextInput::make('confirm_password')->same('new_password')->required()->label('Confirm Password')
+                        ->rule(Password::default())->password()
+                ])->action(function (User $record, array $data) {
+                    $record->update([
+                        'password'=>bcrypt($data['new_password'])
+                    ]);
+                    Filament::notify('success','password has been changed successfully');
+                }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

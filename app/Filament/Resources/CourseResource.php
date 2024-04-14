@@ -37,7 +37,12 @@ class CourseResource extends Resource
                 Forms\Components\FileUpload::make('thumbnail')
                 ->directory('course-attachments')
                 ->required()
-                ->columnSpanFull()
+                ->columnSpanFull(),
+
+                Forms\Components\Select::make('users')
+                    ->multiple()
+                ->relationship('users','name')
+
             ]);
     }
 
