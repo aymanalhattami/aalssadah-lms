@@ -73,23 +73,15 @@ class LessonResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Section::make('Manage Lesson')->
+                schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->columns(2),
+                    ,
 
                 Forms\Components\Select::make('course_id')
                     ->relationship('course','name')
-                    ->required()
-                    ->columns(2),
-
-                Forms\Components\MarkdownEditor::make('content')
-                    ->columnSpanFull(),
-
-                Forms\Components\Select::make('user_id')
-                    ->multiple()
-                    ->relationship('users','name')
-                ->columnSpan(2)
-                ->columns(2),
+                    ->required(),
 
                 Forms\Components\Toggle::make('is_free')
                     ->label('Is Free')
@@ -99,12 +91,22 @@ class LessonResource extends Resource
                     ->label('Status')
                     ->helperText('Enable if the Course is Active'),
 
+                Forms\Components\MarkdownEditor::make('content')
+                    ->columnSpanFull(),
+
+                Forms\Components\Select::make('user_id')
+                    ->multiple()
+                    ->relationship('users','name')
+                ->columnSpan(1),
+
+
+
                 Forms\Components\FileUpload::make('video')
                     ->directory('Lesson-attachment')
                     ->required(),
 
 
-
+                ])->columnSpan(2)->columns(2),
             ]);
     }
 }

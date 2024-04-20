@@ -27,6 +27,8 @@ class SettingResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Section::make('Manage Settings')->
+                schema([
                 Forms\Components\TextInput::make('site_name')
                     ->required()
                     ->maxLength(100),
@@ -40,6 +42,7 @@ class SettingResource extends Resource
 //                    ->disk('local')
                     ->directory('logo-attachments')
 //                    ->visibility('private')
+                ])->columnSpan(2)->columns(2),
             ]);
     }
 
