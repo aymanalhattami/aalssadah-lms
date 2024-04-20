@@ -33,6 +33,8 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Section::make('Manage User')->
+                schema([
                 Forms\Components\TextInput::make('name')
                     ->unique()
                 ->required(),
@@ -49,7 +51,7 @@ class UserResource extends Resource
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                     ->dehydrated(fn ($state) => filled($state))
                     ->required(fn (string $context): bool => $context === 'create')
-
+                ])->columnSpan(2)->columns(2),
             ]);
     }
 
