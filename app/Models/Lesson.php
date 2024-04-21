@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -27,5 +28,10 @@ class Lesson extends Model
     public function course() :belongsTo
     {
         return $this->belongsTo(Course::class);
+    }
+
+    public function scopeActive(Builder $builder)
+    {
+        return $builder->where('status',1);
     }
 }
