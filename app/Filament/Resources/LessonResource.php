@@ -3,15 +3,13 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\LessonResource\Pages;
-use App\Filament\Resources\LessonResource\RelationManagers;
 use App\Models\Lesson;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+
 
 class LessonResource extends Resource
 {
@@ -25,33 +23,7 @@ class LessonResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                ->required()
-                ->columns(2),
-
-                Forms\Components\Select::make('course_id')
-                ->relationship('course','name')
-                ->required()
-                ->columns(2),
-
-                Forms\Components\MarkdownEditor::make('content')
-                ->columnSpanFull(),
-
-                Forms\Components\Toggle::make('is_free')
-                ->label('Is Free')
-                ->helperText('Enable if the Course is Free'),
-
-                Forms\Components\Toggle::make('status')
-                ->label('Status')
-                ->helperText('Enable if the Course is Active'),
-
-                Forms\Components\FileUpload::make('video')
-                    ->directory('Lesson-attachment')
-                ->required(),
-
-            ]);
+       return self::lessonForm($form);
     }
 
     public static function table(Table $table): Table
@@ -95,5 +67,46 @@ class LessonResource extends Resource
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+
+    public static function lessonForm(Form $form) :Form
+    {
+        return $form
+            ->schema([
+                Forms\Components\Section::make('Manage Lesson')->
+                schema([
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ,
+
+                Forms\Components\Select::make('course_id')
+                    ->relationship('course','name')
+                    ->required(),
+
+                Forms\Components\Toggle::make('is_free')
+                    ->label('Is Free')
+                    ->helperText('Enable if the Course is Free'),
+
+                Forms\Components\Toggle::make('status')
+                    ->label('Status')
+                    ->helperText('Enable if the Course is Active'),
+
+                Forms\Components\MarkdownEditor::make('content')
+                    ->columnSpanFull(),
+
+                Forms\Components\Select::make('user_id')
+                    ->multiple()
+                    ->relationship('users','name')
+                ->columnSpan(1),
+
+
+
+                Forms\Components\FileUpload::make('video')
+                    ->directory('Lesson-attachment')
+                    ->required(),
+
+
+                ])->columnSpan(2)->columns(2),
+            ]);
     }
 }

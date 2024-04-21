@@ -27,18 +27,27 @@ class CourseResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                ->required(),
+                Forms\Components\Section::make('Manage Course')->
+                    schema([
+                    Forms\Components\TextInput::make('name')
+                        ->required()
+                    ,
 
-                Forms\Components\Toggle::make('status')
-                ->label('Status')
-                ->helperText('Enable or Disable Course status'),
+                    Forms\Components\Toggle::make('status')
+                        ->label('Status')
+                        ->helperText('Enable or Disable Course status'),
 
-                Forms\Components\FileUpload::make('thumbnail')
-                ->directory('course-attachments')
-                ->required()
-                ->columnSpanFull()
-            ]);
+
+                    Forms\Components\Select::make('users')
+                        ->multiple()
+                        ->relationship('users','name'),
+
+                    Forms\Components\FileUpload::make('thumbnail')
+                        ->directory('course-attachments')
+                        ->required()
+                ])->columnSpan(2)->columns(2),
+                ]);
+
     }
 
     public static function table(Table $table): Table
