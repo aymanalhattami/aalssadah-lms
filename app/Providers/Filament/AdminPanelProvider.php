@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Resources\CourseResource\Widgets\CourseChart;
 use App\Filament\Resources\CourseResource\Widgets\StatsCourse;
 use App\Filament\Resources\LessonResource\Widgets\StatsLesson;
 use App\Filament\Resources\UserResource\Widgets\StatsUser;
@@ -43,7 +44,8 @@ class AdminPanelProvider extends PanelProvider
 //                Widgets\AccountWidget::class,
                   StatsCourse::class,
                   StatsLesson::class,
-                  StatsUser::class
+                  StatsUser::class,
+                  CourseChart::class
 
 
             ])
