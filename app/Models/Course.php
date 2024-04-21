@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -26,5 +27,10 @@ class Course extends Model
     public function lessons() :HasMany
     {
         return $this->HasMany(Lesson::class);
+    }
+
+    public function scopeActive(Builder $query): void
+    {
+        $query->where('status',1);
     }
 }
