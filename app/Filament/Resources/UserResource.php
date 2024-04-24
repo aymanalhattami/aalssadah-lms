@@ -50,7 +50,17 @@ class UserResource extends Resource
                     ->rules('min:8|max:10')
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                     ->dehydrated(fn ($state) => filled($state))
-                    ->required(fn (string $context): bool => $context === 'create')
+                    ->required(fn (string $context): bool => $context === 'create'),
+
+
+                    // Using Select Component
+                    Forms\Components\Select::make('roles')
+                        ->relationship('roles', 'name')
+                        ->multiple()
+                        ->preload()
+                        ->searchable(),
+
+
                 ])->columnSpan(2)->columns(2),
             ]);
     }
