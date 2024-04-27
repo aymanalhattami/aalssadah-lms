@@ -10,4 +10,5 @@ Route::get('/user', function (Request $request) {
 Route::get('courses',[\App\Http\Controllers\CourseController::class,'index'] );
 Route::get('lessons',[\App\Http\Controllers\LessonController::class,'index'] );
 Route::get('settings',[\App\Http\Controllers\SettingController::class,'index'] );
+Route::get('users',[\App\Http\Controllers\UserController::class,'index'] );
 
