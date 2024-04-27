@@ -16,7 +16,7 @@ class Resource extends JsonResource
     public static function collection($resource)
     {
         return parent::collection($resource)->additional([
-            'Success' =>'True',
+           'Success' =>'True',
            'Message'=>'Response Done Successfully'
         ]);
     }
