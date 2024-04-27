@@ -19,7 +19,8 @@ class CourseResource extends Resource
             'name'=>$this->name,
             'thumbnail'=>$this->thumbnail,
             'status'=>$this->status,
-            'created_at'=>DateTimeResource::make($this->created_at)
+            'created_at'=>DateTimeResource::make($this->created_at),
+            'lessons'=>$this->lessons
         ];
     }
 }
