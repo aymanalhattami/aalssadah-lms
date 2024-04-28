@@ -28,6 +28,7 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
+        'status'
     ];
 
     /**
@@ -70,6 +71,6 @@ class User extends Authenticatable implements FilamentUser
 
     public function scopeActive(Builder $builder)
     {
-        $builder->where('status',1);
+       return $builder->where('status',1);
     }
 }
