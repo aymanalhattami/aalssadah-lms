@@ -9,10 +9,14 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class CourseController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         return CourseResource::collection(QueryBuilder::for( Course::class)
             ->AllowedFilters(['name'])
+            ->whereHas('lessons')
+//            ->when(
+//                $request->has('lessons')
+//            )
             ->get()
             );
     }
