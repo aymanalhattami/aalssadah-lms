@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -27,6 +28,7 @@ class UserController extends Controller
             'email'=>'required|string|email|unique:users',
             'password'=>'required|min:8'
         ]);
+
         $user = User::create([
             'name' => $registerUserData['name'],
             'email' => $registerUserData['email'],
@@ -43,10 +45,10 @@ class UserController extends Controller
             'email'=>'required|string|email',
             'password'=>'required|min:8'
         ]);
-        $user = User::where('email',$loginUserData['email'])->first();
+        $user = User::where([['email',$loginUserData['email']],['status',1]])->first();
         if(!$user || !Hash::check($loginUserData['password'],$user->password)){
             return response()->json([
-                'message' => 'Invalid Credentials'
+                'message' => 'Invalid Status Or Credentials'
             ],401);
         }
         $token = $user->createToken($user->name.'-AuthToken')->plainTextToken;
