@@ -20,4 +20,9 @@ class CourseController extends Controller
             ->get()
             );
     }
+
+    public function show($id)
+    {
+        return Course::where('id',$id)->first();
+    }
 }

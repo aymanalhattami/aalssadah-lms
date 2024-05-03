@@ -20,4 +20,9 @@ class LessonController extends Controller
             ->get()
             );
     }
+
+    public function show($id,Request $request)
+    {
+            return Lesson::where('id',$id)->first();
+    }
 }
