@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CourseAccessMiddleware
 {
-    public $data=[];
+    public $name=[];
     /**
      * Handle an incoming request.
      *
@@ -18,22 +18,24 @@ class CourseAccessMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $courses=Course::where('id',$request->route('id'))->with('lessons:is_free,name,course_id')->get();
-//dd($courses);
         foreach ($courses as $course)
         {
-//            echo $course;
             foreach ($course->lessons as $lesson)
             {
                 if ($lesson->is_free)
                 {
-                    echo $lesson->name.' - '. str_replace(['1','0'],['Free','Paid'],$lesson->is_free);
+                    return $next($request);
+//                    $this->name[]=$lesson->name;
+//                    echo $lesson->name.' - '. str_replace(['1','0'],['Free','Paid'],$lesson->is_free);
                 }
             }
-//            dd(  $course->lessons);
         }
-        dd(
-            'a'
-        );
+        return \response()->json([
+            'Response'=>
+                [
+                    'Lesson_name'=>'there is no free courses',
+                ]
+        ]);
 //        return $next($request);
     }
 }

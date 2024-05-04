@@ -9,6 +9,8 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class CourseController extends Controller
 {
+    public $data=[];
+
     public function index(Request $request)
     {
         return CourseResource::collection(QueryBuilder::for( Course::class)
@@ -21,8 +23,26 @@ class CourseController extends Controller
             );
     }
 
-    public function show($id)
+    public function show($id,Request $request)
     {
-        return Course::where('id',$id)->first();
+        $course=Course::where('id',$id)->with('lessons')->get();
+
+        foreach ($course as $lessons)
+        {
+
+           foreach ($lessons->lessons as $lesson)
+           {
+               $this->data[]=$lesson->name;
+           }
+        }
+        if ($request->expectsJson()) {
+            return response()->json($this->data);
+        }
+
+        /*
+         * TODO
+         * return this data to courses details View , So when End-User click on Course Name it opens them the name of lessons of this course
+        */
+        return view('users.index', with($this->data));
     }
 }
