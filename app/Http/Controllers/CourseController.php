@@ -25,18 +25,18 @@ class CourseController extends Controller
 
     public function show($id,Request $request)
     {
-        $course=Course::where('id',$id)->with('lessons')->get();
+        $course=Course::where('id',$id)->with('lessons')->first();
 
-        foreach ($course as $lessons)
+        foreach ($course->lessons as $lesson)
         {
+            $this->data[]=$lesson->name;
 
-           foreach ($lessons->lessons as $lesson)
-           {
-               $this->data[]=$lesson->name;
-           }
         }
+//        dd($this->data);
         if ($request->expectsJson()) {
-            return response()->json($this->data);
+            return response()->json([
+                'Response'=>$this->data
+            ]);
         }
 
         /*

@@ -35,7 +35,7 @@ class CourseAccessMiddleware
                 [
                     'Lesson_name'=>'there is no free courses',
                 ]
-        ]);
+        ],403);
 //        return $next($request);
     }
 }
