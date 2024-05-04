@@ -1,4 +1,4 @@
-<p align="center"><a href="#" target="_blank"><img src="public\images\Lms.png" width="200" alt="LMS Logo"></a></p>
+<p align="center"><a href="#" target="_blank"><img src="public\images\Lms.png" width="400" alt="LMS Logo"></a></p>
 
 ## About Learning Management System
 
