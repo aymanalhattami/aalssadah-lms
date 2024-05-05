@@ -27,7 +27,7 @@ class LessonAccessMiddleware
         }
 
 
-        if (!$lesson->is_free) {
+        if (!$lesson->is_free && !$request->user('sanctum')) {
 //            return redirect()->route('login'); // Redirect to login if lesson requires authentication
 
             return \response()->json([
