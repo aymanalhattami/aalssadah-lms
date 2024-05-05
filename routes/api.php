@@ -20,5 +20,5 @@ Route::post('logout',[\App\Http\Controllers\Api\UserController::class,'logout'])
     ->middleware('auth:sanctum');
 
 // Free Lessons
-Route::get('/lessons/{id}', [\App\Http\Controllers\Api\LessonController::class,'show'])->middleware(['FreeLesson','auth:sanctum']);
+Route::get('/lessons/{id}', [\App\Http\Controllers\Api\LessonController::class,'show'])->middleware(['FreeLesson']);
 Route::get('/course/{id}', [\App\Http\Controllers\Api\CourseController::class,'show'])->middleware(['FreeCourse','auth:sanctum']);
