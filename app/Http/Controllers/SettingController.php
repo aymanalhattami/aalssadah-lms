@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SettingResource;
@@ -11,10 +11,6 @@ class SettingController extends Controller
 {
     public function index()
     {
-        return SettingResource::collection(QueryBuilder::for( Setting::class)
-            ->AllowedFilters([
-                'vision','goal','site_name'
-            ])
-            );
+
     }
 }
