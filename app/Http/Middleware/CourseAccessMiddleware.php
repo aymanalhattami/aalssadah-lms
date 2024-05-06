@@ -25,17 +25,15 @@ class CourseAccessMiddleware
                 if ($lesson->is_free)
                 {
                     return $next($request);
-//                    $this->name[]=$lesson->name;
-//                    echo $lesson->name.' - '. str_replace(['1','0'],['Free','Paid'],$lesson->is_free);
                 }
             }
         }
         return \response()->json([
             'Response'=>
                 [
-                    'Lesson_name'=>'there is no free courses',
+                    'Lesson_name'=>'there is no free lessons in this course',
                 ]
         ],403);
-//        return $next($request);
+
     }
 }
