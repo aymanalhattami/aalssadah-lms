@@ -44,6 +44,10 @@ class CourseResource extends Resource
 
                     Forms\Components\FileUpload::make('thumbnail')
                         ->directory('course-attachments')
+                        ->imageEditor()
+                        ->downloadable()
+                        ->openable()
+                        ->uploadingMessage('Uploading Course Image .....')
                         ->required()
                 ])->columnSpan(2)->columns(2),
                 ]);

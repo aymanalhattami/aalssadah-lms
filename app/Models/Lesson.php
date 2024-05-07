@@ -20,6 +20,10 @@ class Lesson extends Model
       'status'
     ];
 
+    protected $casts = [
+        'video' => 'array',
+    ];
+
     public function users() :belongsToMany
     {
         return $this->belongsToMany(User::class);
