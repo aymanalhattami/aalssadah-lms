@@ -11,6 +11,11 @@ class SettingController extends Controller
 {
     public function index()
     {
+        $settings=Setting::select( 'site_name',
+            'goal',
+            'vision',
+            'logo')->get();
 
+        return view('settings',compact('settings'));
     }
 }
