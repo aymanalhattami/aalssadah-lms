@@ -12,12 +12,12 @@ use Filament\Panel;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Permission\Traits\HasRoles;
 use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
-
+use Laravel\Sanctum\HasApiTokens;
 
 
 class User extends Authenticatable implements FilamentUser
 {
-    use HasFactory, Notifiable,HasRoles, HasPanelShield;
+    use HasFactory, Notifiable,HasRoles, HasPanelShield,HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -28,6 +28,7 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
+        'status'
     ];
 
     /**
@@ -70,6 +71,6 @@ class User extends Authenticatable implements FilamentUser
 
     public function scopeActive(Builder $builder)
     {
-        $builder->where('status',1);
+       return $builder->where('status',1);
     }
 }

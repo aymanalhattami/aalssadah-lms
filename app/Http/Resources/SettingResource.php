@@ -14,6 +14,12 @@ class SettingResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id'=>$this->id,
+            'site_name'=>$this->site_name,
+            'logo'=>$this->logo,
+            'vision'=>$this->vision,
+            'goal'=>$this->goal,
+            ];
     }
 }
