@@ -3,9 +3,11 @@
 namespace App\Filament\Resources\CourseResource\Widgets;
 
 use Filament\Widgets\ChartWidget;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 
 class CourseChart extends ChartWidget
 {
+    use HasWidgetShield;
     protected static ?string $heading = 'Chart';
 
     protected static string $color='primary';

@@ -5,10 +5,11 @@ namespace App\Filament\Resources\LessonResource\Widgets;
 use App\Models\Lesson;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 
 class StatsLesson extends BaseWidget
 {
-
+    use HasWidgetShield;
     protected static ?int $sort=2;
 
    protected function getColumns(): int
