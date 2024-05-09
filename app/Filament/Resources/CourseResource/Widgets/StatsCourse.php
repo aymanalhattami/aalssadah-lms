@@ -6,9 +6,12 @@ use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use App\Models\Course;
 use Illuminate\Support\Facades\Log;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
+
 
 class StatsCourse extends BaseWidget
 {
+     use HasWidgetShield;
 
     protected static ?int $sort=1;
 

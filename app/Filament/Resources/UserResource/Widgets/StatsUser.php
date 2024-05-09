@@ -5,10 +5,11 @@ namespace App\Filament\Resources\UserResource\Widgets;
 use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 
 class StatsUser extends BaseWidget
 {
-
+    use HasWidgetShield;
     protected static ?int $sort=3;
 
     protected int | string | array $columnSpan='full';

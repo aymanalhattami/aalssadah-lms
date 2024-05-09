@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
@@ -54,20 +55,42 @@ class User extends Authenticatable implements FilamentUser
         ];
     }
 
+    /**
+     * Give Access into filament Panel.
+     */
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
     }
 
+    /**
+     * Get the courses associated with the user.
+     */
     public function courses() :BelongsToMany
     {
         return $this->BelongsToMany(Course::class);
     }
 
+    /**
+     * Get the lessons associated with the user.
+     */
     public function lessons() :BelongsToMany
     {
         return $this->BelongsToMany(Lesson::class);
     }
+
+
+    /**
+     * Get the certificate associated with the user.
+     */
+    public function certificate() :HasOne
+    {
+        return $this->hasOne(Certificate::class);
+    }
+
+    /**
+     * Get the Active user.
+     */
 
     public function scopeActive(Builder $builder)
     {
