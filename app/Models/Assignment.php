@@ -6,23 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Certificate extends Model
+class Assignment extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
-        'name',
-        'content',
-        'issue_date',
-        'certificate_link'
-    ];
-
     /**
-     * Get the user associated with the certificate.
+     * Get the assignment associated with the course.
      */
     public function course() :HasOne
     {
         return $this->hasOne(Course::class);
     }
-
 }
