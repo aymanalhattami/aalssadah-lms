@@ -80,13 +80,6 @@ class User extends Authenticatable implements FilamentUser
     }
 
 
-    /**
-     * Get the certificate associated with the user.
-     */
-    public function certificate() :HasOne
-    {
-        return $this->hasOne(Certificate::class);
-    }
 
     /**
      * Get the Active user.

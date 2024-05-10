@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained();
             $table->foreignId('course_id')->nullable()->constrained();
-            $table->integer('is_completed')->default(0);
+            $table->boolean('is_completed')->default(0);
+            $table->boolean('has_certificate')->default(0);
+            $table->bigInteger('grade')->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();
         });
