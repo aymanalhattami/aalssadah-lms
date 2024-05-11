@@ -47,9 +47,9 @@ class Course extends Model
     /**
      * Get the assignment associated with the course.
      */
-    public function assignment() :HasOne
+    public function exam() :HasOne
     {
-        return $this->hasOne(Assignment::class);
+        return $this->hasOne(Exam::class);
     }
 
     public function scopeActive(Builder $query): void
