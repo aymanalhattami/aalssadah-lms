@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->foreignId('course_id')->nullable()->constrained();
-            $table->foreignId('question_id')->nullable()->constrained();
             $table->integer('status')->default(1);
             $table->timestamps();
         });
