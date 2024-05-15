@@ -21,7 +21,7 @@ class CertificateResource extends Resource
 
     protected static ?string $navigationGroup = 'Exams & Questions';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 8;
 
     public static function form(Form $form): Form
     {
@@ -64,5 +64,10 @@ class CertificateResource extends Resource
             'create' => Pages\CreateCertificate::route('/create'),
             'edit' => Pages\EditCertificate::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }
