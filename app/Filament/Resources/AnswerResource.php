@@ -21,7 +21,7 @@ class AnswerResource extends Resource
 
     protected static ?string $navigationGroup = 'Exams & Questions';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 6;
 
     public static function form(Form $form): Form
     {
@@ -64,5 +64,10 @@ class AnswerResource extends Resource
             'create' => Pages\CreateAnswer::route('/create'),
             'edit' => Pages\EditAnswer::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }
