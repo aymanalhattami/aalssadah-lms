@@ -30,8 +30,7 @@ class CourseResource extends Resource
                 Forms\Components\Section::make('Manage Course')->
                     schema([
                     Forms\Components\TextInput::make('name')
-                        ->required()
-                    ,
+                        ->required(),
 
                     Forms\Components\Toggle::make('status')
                         ->label('Status')

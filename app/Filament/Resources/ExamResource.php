@@ -27,7 +27,23 @@ class ExamResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Section::make('Manage Course')->
+                schema([
+
+                    Forms\Components\TextInput::make('name')
+                        ->label('Name')
+                        ->required(),
+
+                    Forms\Components\Select::make('course')
+                        ->relationship('course','name')
+                    ->required(),
+
+                    Forms\Components\Toggle::make('status')
+                        ->label('Status')
+                        ->helperText('Enable or Disable Course status'),
+
+
+                ])->columnSpan(2)->columns(2)
             ]);
     }
 
@@ -35,7 +51,13 @@ class ExamResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                ->label('Name of Exam'),
+
+                Tables\Columns\TextColumn::make('course.name')
+                ->label('Name of Course'),
+
+                Tables\Columns\ToggleColumn::make('status')
             ])
             ->filters([
                 //
