@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CourseResource\Pages;
-use App\Filament\Resources\CourseResource\RelationManagers;
-use App\Models\Course;
+use App\Filament\Resources\ExamResource\Pages;
+use App\Filament\Resources\ExamResource\RelationManagers;
+use App\Models\Exam;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,53 +13,51 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class CourseResource extends Resource
+class ExamResource extends Resource
 {
-    protected static ?string $model = Course::class;
+    protected static ?string $model = Exam::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Courses';
+    protected static ?string $navigationGroup = 'Exams & Questions';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Section::make('Manage Course')->
-                    schema([
+                schema([
+
                     Forms\Components\TextInput::make('name')
+                        ->label('Name')
                         ->required(),
+
+                    Forms\Components\Select::make('course')
+                        ->relationship('course','name')
+                    ->required(),
 
                     Forms\Components\Toggle::make('status')
                         ->label('Status')
                         ->helperText('Enable or Disable Course status'),
 
 
-                    Forms\Components\Select::make('users')
-                        ->multiple()
-                        ->relationship('users','name'),
-
-                    Forms\Components\FileUpload::make('thumbnail')
-                        ->directory('course-attachments')
-                        ->imageEditor()
-                        ->downloadable()
-                        ->openable()
-                        ->uploadingMessage('Uploading Course Image .....')
-                        ->required()
-                ])->columnSpan(2)->columns(2),
-                ]);
-
+                ])->columnSpan(2)->columns(2)
+            ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('thumbnail'),
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\ToggleColumn::make('status'),
+                Tables\Columns\TextColumn::make('name')
+                ->label('Name of Exam'),
+
+                Tables\Columns\TextColumn::make('course.name')
+                ->label('Name of Course'),
+
+                Tables\Columns\ToggleColumn::make('status')
             ])
             ->filters([
                 //
@@ -77,16 +75,16 @@ class CourseResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\LessonsRelationManager::class,
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCourses::route('/'),
-            'create' => Pages\CreateCourse::route('/create'),
-            'edit' => Pages\EditCourse::route('/{record}/edit'),
+            'index' => Pages\ListExams::route('/'),
+            'create' => Pages\CreateExam::route('/create'),
+            'edit' => Pages\EditExam::route('/{record}/edit'),
         ];
     }
 

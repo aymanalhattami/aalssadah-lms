@@ -10,11 +10,19 @@ class Certificate extends Model
 {
     use HasFactory;
 
+    protected $fillable=[
+        'name',
+        'content',
+        'issue_date',
+        'certificate_link'
+    ];
+
     /**
      * Get the user associated with the certificate.
      */
-    public function user() :HasOne
+    public function course() :HasOne
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(Course::class);
     }
+
 }
