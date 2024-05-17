@@ -27,7 +27,7 @@ class AnswerResource extends Resource
     {
         return $form
             ->schema([
-                //
+            //
             ]);
     }
 
@@ -35,13 +35,14 @@ class AnswerResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('answer'),
+                Tables\Columns\TextColumn::make('question.question'),
+                Tables\Columns\CheckboxColumn::make('is_correct')->disabled(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -61,8 +62,6 @@ class AnswerResource extends Resource
     {
         return [
             'index' => Pages\ListAnswers::route('/'),
-            'create' => Pages\CreateAnswer::route('/create'),
-            'edit' => Pages\EditAnswer::route('/{record}/edit'),
         ];
     }
 
