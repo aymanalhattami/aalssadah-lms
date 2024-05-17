@@ -27,7 +27,21 @@ class QuestionResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Section::make('Manage Question')->
+                schema([
+
+                    Forms\Components\TextInput::make('question')
+                        ->label('Question')
+                        ->required(),
+
+                    Forms\Components\Select::make('exam')
+                        ->relationship('exam','name')
+                        ->required(),
+
+                    Forms\Components\Toggle::make('status')
+                        ->label('Status')
+
+                ])->columnSpan(2)->columns(2)
             ]);
     }
 
@@ -35,7 +49,9 @@ class QuestionResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('question'),
+                Tables\Columns\TextColumn::make('exam.name'),
+                Tables\Columns\ToggleColumn::make('status'),
             ])
             ->filters([
                 //
