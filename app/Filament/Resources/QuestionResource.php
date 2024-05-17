@@ -39,10 +39,32 @@ class QuestionResource extends Resource
                         ->required(),
 
                     Forms\Components\Toggle::make('status')
-                        ->label('Status')
+                        ->label('Status'),
 
-                ])->columnSpan(2)->columns(2)
-            ]);
+
+
+                ])->columnSpan(2)->columns(2),
+
+                Forms\Components\Section::make('Manage Answers')->
+                schema([
+                Forms\Components\Repeater::make('answers')
+                    ->relationship()
+                    ->schema([
+                        Forms\Components\TextInput::make('answer')
+                            ->required(),
+
+                        Forms\Components\Checkbox::make('is_correct')
+                            ->label('Is This Answer Correct')
+                    ])->grid(2)
+                    ->defaultItems(4)
+                    ->addable(false)
+                    ->deletable(false)
+                    ->minItems(1)
+                    ->maxItems(4)
+            ])
+
+        ]);
+
     }
 
     public static function table(Table $table): Table
