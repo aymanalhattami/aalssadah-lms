@@ -27,7 +27,7 @@ class ExamResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Manage Course')->
+                Forms\Components\Section::make('Manage Exam')->
                 schema([
 
                     Forms\Components\TextInput::make('name')
