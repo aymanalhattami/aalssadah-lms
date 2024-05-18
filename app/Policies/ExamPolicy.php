@@ -10,6 +10,7 @@ use Illuminate\Auth\Access\Response;
 class ExamPolicy
 {
     use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      */
