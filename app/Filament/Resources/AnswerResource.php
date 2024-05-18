@@ -17,7 +17,7 @@ class AnswerResource extends Resource
 {
     protected static ?string $model = Answer::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-presentation-chart-line';
 
     protected static ?string $navigationGroup = 'Exams & Questions';
 
