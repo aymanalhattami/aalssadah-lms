@@ -2,14 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Answer;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Models\Answer;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AnswerPolicy
 {
-
     use HandlesAuthorization;
 
     /**
@@ -53,15 +51,15 @@ class AnswerPolicy
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the user can bulk delete.
      */
-    public function restore(User $user, Answer $answer): bool
+    public function deleteAny(User $user): bool
     {
-        return $user->can('restore_answer');
+        return $user->can('delete_any_answer');
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can permanently delete.
      */
     public function forceDelete(User $user, Answer $answer): bool
     {
@@ -70,9 +68,6 @@ class AnswerPolicy
 
     /**
      * Determine whether the user can permanently bulk delete.
-     *
-     * @param  \App\Models\User  $user
-     * @return bool
      */
     public function forceDeleteAny(User $user): bool
     {
@@ -80,15 +75,34 @@ class AnswerPolicy
     }
 
     /**
-     * Determine whether the user can bulk delete.
-     *
-     * @param  \App\Models\User  $user
-     * @return bool
+     * Determine whether the user can restore.
      */
-    public function deleteAny(User $user): bool
+    public function restore(User $user, Answer $answer): bool
     {
-        return $user->can('delete_any_answer');
+        return $user->can('restore_answer');
     }
 
+    /**
+     * Determine whether the user can bulk restore.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('restore_any_answer');
+    }
 
+    /**
+     * Determine whether the user can replicate.
+     */
+    public function replicate(User $user, Answer $answer): bool
+    {
+        return $user->can('replicate_answer');
+    }
+
+    /**
+     * Determine whether the user can reorder.
+     */
+    public function reorder(User $user): bool
+    {
+        return $user->can('reorder_answer');
+    }
 }

@@ -2,14 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Question;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Models\Question;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class QuestionPolicy
 {
-
     use HandlesAuthorization;
 
     /**
@@ -54,9 +52,6 @@ class QuestionPolicy
 
     /**
      * Determine whether the user can bulk delete.
-     *
-     * @param  \App\Models\User  $user
-     * @return bool
      */
     public function deleteAny(User $user): bool
     {
@@ -64,15 +59,7 @@ class QuestionPolicy
     }
 
     /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Question $question): bool
-    {
-        return $user->can('restore_question');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can permanently delete.
      */
     public function forceDelete(User $user, Question $question): bool
     {
@@ -81,13 +68,41 @@ class QuestionPolicy
 
     /**
      * Determine whether the user can permanently bulk delete.
-     *
-     * @param  \App\Models\User  $user
-     * @return bool
      */
     public function forceDeleteAny(User $user): bool
     {
         return $user->can('force_delete_any_question');
     }
 
+    /**
+     * Determine whether the user can restore.
+     */
+    public function restore(User $user, Question $question): bool
+    {
+        return $user->can('restore_question');
+    }
+
+    /**
+     * Determine whether the user can bulk restore.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('restore_any_question');
+    }
+
+    /**
+     * Determine whether the user can replicate.
+     */
+    public function replicate(User $user, Question $question): bool
+    {
+        return $user->can('replicate_question');
+    }
+
+    /**
+     * Determine whether the user can reorder.
+     */
+    public function reorder(User $user): bool
+    {
+        return $user->can('reorder_question');
+    }
 }
