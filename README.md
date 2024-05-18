@@ -14,9 +14,9 @@ LMS is accessible, powerful, and provides tools required for large, robust appli
 
 LMS is a system build in Laravel which has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-- Fork Project
-- Migrate DataBase By this Command ```php artisan migrate```
-- Seed DataBase By this Command ```php artisan seed:db```
+- Pull Project
+- Migrate DataBase By Using this Command ```php artisan migrate```
+- Seed DataBase By Using this Command ```php artisan seed:db```
 - Duplicate ```env.example``` and name it to ```.env``` then open env file and change the ```APP_URL``` into your domain or leave it as it is.
 - Run ```php artisan serve```
 - visit this link to get into Admin Panel [http://your-domain.com/admin]()
