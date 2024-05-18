@@ -33,7 +33,7 @@ class LessonResource extends Resource
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('course.name'),
                 Tables\Columns\ToggleColumn::make('is_free'),
-                Tables\Columns\ToggleColumn::make('status'),
+                Tables\Columns\ToggleColumn::make('status')->disabled(),
             ])
             ->filters([
                 //
