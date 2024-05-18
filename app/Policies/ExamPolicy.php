@@ -2,10 +2,9 @@
 
 namespace App\Policies;
 
-use App\Models\Exam;
 use App\Models\User;
+use App\Models\Exam;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
 
 class ExamPolicy
 {
@@ -59,6 +58,13 @@ class ExamPolicy
         return $user->can('delete_any_exam');
     }
 
+    /**
+     * Determine whether the user can permanently delete.
+     */
+    public function forceDelete(User $user, Exam $exam): bool
+    {
+        return $user->can('force_delete_exam');
+    }
 
     /**
      * Determine whether the user can permanently bulk delete.

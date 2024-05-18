@@ -2,14 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Certificate;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Models\Certificate;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CertificatePolicy
 {
-
     use HandlesAuthorization;
 
     /**
@@ -53,15 +51,15 @@ class CertificatePolicy
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the user can bulk delete.
      */
-    public function restore(User $user, Certificate $certificate): bool
+    public function deleteAny(User $user): bool
     {
-        return $user->can('restore_certificate');
+        return $user->can('delete_any_certificate');
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can permanently delete.
      */
     public function forceDelete(User $user, Certificate $certificate): bool
     {
@@ -70,25 +68,41 @@ class CertificatePolicy
 
     /**
      * Determine whether the user can permanently bulk delete.
-     *
-     * @param  \App\Models\User  $user
-     * @return bool
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_question');
+        return $user->can('force_delete_any_certificate');
     }
 
     /**
-     * Determine whether the user can bulk delete.
-     *
-     * @param  \App\Models\User  $user
-     * @return bool
+     * Determine whether the user can restore.
      */
-    public function deleteAny(User $user): bool
+    public function restore(User $user, Certificate $certificate): bool
     {
-        return $user->can('delete_any_question');
+        return $user->can('restore_certificate');
     }
 
+    /**
+     * Determine whether the user can bulk restore.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('restore_any_certificate');
+    }
 
+    /**
+     * Determine whether the user can replicate.
+     */
+    public function replicate(User $user, Certificate $certificate): bool
+    {
+        return $user->can('replicate_certificate');
+    }
+
+    /**
+     * Determine whether the user can reorder.
+     */
+    public function reorder(User $user): bool
+    {
+        return $user->can('reorder_certificate');
+    }
 }

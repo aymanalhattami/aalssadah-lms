@@ -36,12 +36,12 @@ class UserResource extends Resource
                 Forms\Components\Section::make('Manage User')->
                 schema([
                 Forms\Components\TextInput::make('name')
-                    ->unique()
+                    ->unique(ignoreRecord: true)
                 ->required(),
 
                 Forms\Components\TextInput::make('email')
                 ->email()
-                ->unique()
+                ->unique(ignoreRecord: true)
                 ->required(),
 
 

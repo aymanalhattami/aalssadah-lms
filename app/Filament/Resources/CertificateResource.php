@@ -27,7 +27,10 @@ class CertificateResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name'),
+                Forms\Components\TextInput::make('content'),
+                Forms\Components\DateTimePicker::make('issue_date'),
+                Forms\Components\TextInput::make('certificate_link')
             ]);
     }
 
@@ -35,7 +38,8 @@ class CertificateResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('content'),
             ])
             ->filters([
                 //

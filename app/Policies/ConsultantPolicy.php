@@ -2,14 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Consultant;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Models\Consultant;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ConsultantPolicy
 {
-
     use HandlesAuthorization;
 
     /**
@@ -53,15 +51,15 @@ class ConsultantPolicy
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the user can bulk delete.
      */
-    public function restore(User $user, Consultant $consultant): bool
+    public function deleteAny(User $user): bool
     {
-        return $user->can('restore_consultant');
+        return $user->can('delete_any_consultant');
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can permanently delete.
      */
     public function forceDelete(User $user, Consultant $consultant): bool
     {
@@ -70,9 +68,6 @@ class ConsultantPolicy
 
     /**
      * Determine whether the user can permanently bulk delete.
-     *
-     * @param  \App\Models\User  $user
-     * @return bool
      */
     public function forceDeleteAny(User $user): bool
     {
@@ -80,15 +75,34 @@ class ConsultantPolicy
     }
 
     /**
-     * Determine whether the user can bulk delete.
-     *
-     * @param  \App\Models\User  $user
-     * @return bool
+     * Determine whether the user can restore.
      */
-    public function deleteAny(User $user): bool
+    public function restore(User $user, Consultant $consultant): bool
     {
-        return $user->can('delete_any_consultant');
+        return $user->can('restore_consultant');
     }
 
+    /**
+     * Determine whether the user can bulk restore.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('restore_any_consultant');
+    }
 
+    /**
+     * Determine whether the user can replicate.
+     */
+    public function replicate(User $user, Consultant $consultant): bool
+    {
+        return $user->can('replicate_consultant');
+    }
+
+    /**
+     * Determine whether the user can reorder.
+     */
+    public function reorder(User $user): bool
+    {
+        return $user->can('reorder_consultant');
+    }
 }
