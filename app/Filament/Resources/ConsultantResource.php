@@ -27,7 +27,24 @@ class ConsultantResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Section::make('Manage User')->
+                schema([
+                Forms\Components\TextInput::make('name')
+                ->unique(ignoreRecord: true)
+                ->required(),
+
+                Forms\Components\TextInput::make('email')
+                ->email()
+                ->unique(ignoreRecord: true)
+                ->required(),
+
+                Forms\Components\TextInput::make('password')
+                ->password()
+                ->required(),
+
+                Forms\Components\Toggle::make('status')
+                ->required()
+                ])->columns(2)
             ]);
     }
 
@@ -35,7 +52,8 @@ class ConsultantResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('email'),
             ])
             ->filters([
                 //
