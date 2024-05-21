@@ -59,7 +59,7 @@ class CourseResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('thumbnail'),
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\ToggleColumn::make('status')->disabled(),
+                Tables\Columns\IconColumn::make('status')->boolean(),
             ])
             ->filters([
                 //

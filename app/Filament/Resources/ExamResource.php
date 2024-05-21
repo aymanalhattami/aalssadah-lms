@@ -57,7 +57,7 @@ class ExamResource extends Resource
                 Tables\Columns\TextColumn::make('course.name')
                 ->label('Name of Course'),
 
-                Tables\Columns\ToggleColumn::make('status')->disabled()
+                Tables\Columns\IconColumn::make('status')->boolean()
             ])
             ->filters([
                 //

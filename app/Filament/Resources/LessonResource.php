@@ -32,8 +32,12 @@ class LessonResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('course.name'),
-                Tables\Columns\ToggleColumn::make('is_free'),
-                Tables\Columns\ToggleColumn::make('status')->disabled(),
+                Tables\Columns\IconColumn::make('is_free')->boolean()
+                ->trueIcon('heroicon-s-tv')
+                    ->trueColor('success')
+                ->falseIcon('heroicon-o-currency-dollar')
+                ->falseColor('danger'),
+                Tables\Columns\IconColumn::make('status')->boolean(),
             ])
             ->filters([
                 //

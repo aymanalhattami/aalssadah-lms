@@ -34,7 +34,7 @@ class QuestionResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('question'),
                 Tables\Columns\TextColumn::make('exam.name'),
-                Tables\Columns\ToggleColumn::make('status')->disabled(),
+                Tables\Columns\IconColumn::make('status')->boolean(),
             ])
             ->filters([
                 //
