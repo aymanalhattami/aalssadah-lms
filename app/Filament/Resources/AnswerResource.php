@@ -35,9 +35,9 @@ class AnswerResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('answer'),
                 Tables\Columns\TextColumn::make('question.question'),
-                Tables\Columns\CheckboxColumn::make('is_correct')->disabled(),
+                Tables\Columns\TextColumn::make('answer'),
+                Tables\Columns\IconColumn::make('is_correct')->boolean(),
             ])
             ->filters([
                 //
