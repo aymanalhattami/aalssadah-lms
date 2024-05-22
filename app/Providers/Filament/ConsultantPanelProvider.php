@@ -26,6 +26,8 @@ class ConsultantPanelProvider extends PanelProvider
             ->id('consultant')
             ->path('consultant')
             ->login()
+            ->registration()
+            ->topNavigation()
             ->passwordReset()
             ->emailVerification()
             ->profile()
