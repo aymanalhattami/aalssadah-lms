@@ -39,6 +39,7 @@ class CourseResource extends Resource
 
                     Forms\Components\Select::make('users')
                         ->multiple()
+                        ->preload()
                         ->relationship('users','name'),
 
                     Forms\Components\FileUpload::make('thumbnail')

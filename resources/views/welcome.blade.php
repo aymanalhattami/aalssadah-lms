@@ -168,10 +168,10 @@
             </div>
         </div>
         <div class="email-content">
-            <p>Subscribe now to get the latest updates!</p>
+            <p>Go to Admin Panel and Start working with Courses!</p>
             <div class="input-box">
 {{--                <input type="email" placeholder="Enter your email..." />--}}
-                <button>Notify Me</button>
+{{--                <button>Notify Me</button>--}}
                 <button><a href="/admin">Admin Panel</a></button>
             </div>
         </div>
