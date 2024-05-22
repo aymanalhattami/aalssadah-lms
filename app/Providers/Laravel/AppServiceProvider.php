@@ -25,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
 
+        if (config('app.env') === 'production') {
+            \URL::forceScheme('https');
+        }
 
     }
 }
