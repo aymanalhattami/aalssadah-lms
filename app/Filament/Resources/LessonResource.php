@@ -101,12 +101,15 @@ class LessonResource extends Resource
                 Forms\Components\Select::make('user_id')
                     ->multiple()
                     ->relationship('users','name')
-                ->columnSpan(1),
+                    ->preload()
+                    ->columnSpan(1),
 
 
 
                 Forms\Components\FileUpload::make('video')
                     ->directory('Lesson-attachment')
+                    ->acceptedFileTypes(['video/mp4','video/ogg','video/webm'])
+                    ->maxSize(51200)
                     ->required(),
 
 

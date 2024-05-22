@@ -10,6 +10,10 @@ Route::get('home',function(){
    return view('home');
 });
 
+//Route::get('/phpinfo', function () {
+//    phpinfo();
+//});
+
 // Courses Views
 Route::prefix('courses')->group(function () {
     Route::get('/', [\App\Http\Controllers\CourseController::class, 'index']);
