@@ -39,7 +39,7 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 Pages\Dashboard::class,
             ])
-            ->brandLogo(asset('logo.jpeg'))
+            ->brandLogo(asset('logo.png'))
             ->brandLogoHeight('4rem')
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()

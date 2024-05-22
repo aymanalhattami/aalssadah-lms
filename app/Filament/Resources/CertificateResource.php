@@ -27,10 +27,12 @@ class CertificateResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Section::make('Manage Certificate')->
+                schema([
                 Forms\Components\TextInput::make('name'),
-                Forms\Components\TextInput::make('content'),
-                Forms\Components\DateTimePicker::make('issue_date'),
-                Forms\Components\TextInput::make('certificate_link')
+                Forms\Components\FileUpload::make('content')
+                ->label('Upload Certificate'),
+                ])->columns(2)
             ]);
     }
 
@@ -39,7 +41,8 @@ class CertificateResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('content'),
+                Tables\Columns\ImageColumn::make('content')
+                ->label('Certificate'),
             ])
             ->filters([
                 //
